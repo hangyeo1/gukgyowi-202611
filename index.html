@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>국교위 11월 토론회 사전자료집</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: 차분하고 공적인 안내 — 책을 방해하지 않는 뷰어
+   IDEA: 책상 위에 펼쳐 놓은 인쇄 책자
+   PICTURE: 자료집 페이지(펼침면) 자체가 화면의 주인공
+   COLOUR and TYPE: 표지의 남색 바탕 + 하늘색 강조, Noto Sans KR
+   LAYOUT: 얇은 상단 막대 / 가운데 책 / 하단 쪽 슬라이더 */
+:root{color-scheme:dark;--bg:#151935;--bar:#1c2146;--line:#2d3466;--ink:#eef1ff;--mute:#a9b0d6;--acc:#9fdbe3}
+*{box-sizing:border-box;min-width:0}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Noto Sans KR",system-ui,sans-serif;overflow:hidden;display:flex;flex-direction:column}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+header{display:flex;align-items:center;gap:12px;padding:8px max(2vw,12px);background:var(--bar);border-bottom:1px solid var(--line);flex:none}
+.ttl{flex:1;line-height:1.3}
+.ttl b{display:block;font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ttl span{font-size:13px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.tools{display:flex;gap:6px;align-items:center;flex:none}
+.btn{min-height:40px;padding:0 14px;border-radius:20px;border:1px solid var(--line);font-size:14px;white-space:nowrap}
+.btn:hover{border-color:var(--acc)}
+.seg{display:flex;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.seg button{min-height:40px;padding:0 12px;font-size:14px;white-space:nowrap}
+.seg button[aria-pressed=true]{background:var(--acc);color:#151935;font-weight:700}
+main{flex:1;position:relative;overflow:hidden}
+#stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:18px 64px;gap:0}
+#stage img{max-height:100%;max-width:calc(50% - 0px);height:auto;width:auto;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.45);cursor:zoom-in;user-select:none;-webkit-user-drag:none}
+#stage.single img{max-width:100%}
+#stage.spread img:first-child:not(:only-child){box-shadow:-8px 10px 30px rgba(0,0,0,.45),inset -12px 0 18px -12px rgba(0,0,0,.25)}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(28,33,70,.85);border:1px solid var(--line);display:grid;place-items:center;z-index:2}
+.nav:disabled{opacity:.25;cursor:default}
+.nav svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:2.2}
+#prev{left:8px}#next{right:8px}
+#scroll{position:absolute;inset:0;overflow-y:auto;display:none;padding:16px 12px 40px}
+#scroll img{display:block;width:100%;max-width:900px;height:auto;aspect-ratio:1654/2339;margin:0 auto 14px;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.4);cursor:zoom-in}
+body.m-scroll #scroll{display:block}body.m-scroll #stage,body.m-scroll .nav{display:none}
+footer{display:flex;align-items:center;gap:14px;padding:8px max(2vw,12px);background:var(--bar);border-top:1px solid var(--line);flex:none}
+#range{flex:1;accent-color:var(--acc);height:32px}
+#count{font-variant-numeric:tabular-nums;white-space:nowrap;font-size:14px;color:var(--mute);min-width:70px;text-align:right}
+#count b{color:var(--ink)}
+.panel{position:fixed;inset:0;background:rgba(10,12,30,.6);display:none;z-index:10}
+.panel.open{display:block}
+.sheet{position:absolute;top:0;right:0;bottom:0;width:min(380px,92vw);background:var(--bar);border-left:1px solid var(--line);overflow-y:auto;padding:18px 20px 30px}
+.sheet h2{font-size:18px;margin:4px 0 14px;display:flex;justify-content:space-between;align-items:center}
+.x{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);font-size:20px;line-height:1}
+.toc button{display:flex;justify-content:space-between;gap:12px;width:100%;text-align:left;padding:11px 10px;border-radius:8px;min-height:44px}
+.toc button:hover,.toc button.on{background:var(--line)}
+.toc .sub{padding-left:26px;font-size:14px;color:var(--mute)}
+.toc .pg{color:var(--mute);font-variant-numeric:tabular-nums;flex:none}
+.note{font-size:13px;color:var(--mute);margin-top:18px;line-height:1.6}
+#grid .sheet{width:100%;left:0;border:0;background:var(--bg)}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:16px;max-width:1200px;margin:0 auto}
+.thumbs button{display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px;border-radius:8px}
+.thumbs img{width:100%;height:auto;aspect-ratio:1654/2339;background:#fff;border:2px solid transparent}
+.thumbs button.on img{border-color:var(--acc)}
+.thumbs span{font-size:13px;color:var(--mute)}
+#zoom{position:fixed;inset:0;background:#0d1028;z-index:20;display:none;overflow:auto}
+#zoom.open{display:block}
+#zoom img{display:block;width:min(100%,1300px);height:auto;margin:0 auto;background:#fff}
+#zoom .x{position:fixed;top:12px;right:16px;background:var(--bar);z-index:21}
+@media(max-width:760px){
+  .ttl span{display:none}
+  .btn.hide-s,.seg .hide-s{display:none}
+  .seg button{padding:0 10px;font-size:13px}
+  #stage{padding:10px 8px}
+  .nav{width:38px;height:38px;background:rgba(28,33,70,.55)}
+  #prev{left:4px}#next{right:4px}
+}
+@media(max-width:420px){.ttl b{font-size:14px}#tocBtn{padding:0 10px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="ttl"><b>지속적인 학습과 역량개발을 위한 교육체제</b><span>국가교육위원회 국민참여위원회 11월 토론회 · 사전자료집</span></div>
+  <div class="tools">
+    <div class="seg" role="group" aria-label="보기 방식">
+      <button id="mSpread" class="hide-s" data-m="spread">펼쳐보기</button>
+      <button data-m="single">한 쪽씩</button>
+      <button data-m="scroll">스크롤</button>
+    </div>
+    <button class="btn hide-s" id="gridBtn">모아보기</button>
+    <button class="btn" id="tocBtn">목차</button>
+  </div>
+</header>
+<main>
+  <div id="stage"></div>
+  <div id="scroll"></div>
+  <button class="nav" id="prev" aria-label="이전 쪽"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button class="nav" id="next" aria-label="다음 쪽"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+</main>
+<footer>
+  <input type="range" id="range" min="1" max="45" value="1" aria-label="쪽 이동">
+  <div id="count"><b>1</b> / 45</div>
+</footer>
+
+<div class="panel" id="toc"><div class="sheet">
+  <h2>목차 <button class="x" data-close aria-label="닫기">×</button></h2>
+  <div class="toc" id="tocList"></div>
+  <p class="note">페이지를 누르면 크게 볼 수 있어요. 휴대폰에서는 화면을 옆으로 밀어 넘길 수 있어요.</p>
+</div></div>
+<div class="panel" id="grid"><div class="sheet">
+  <h2>모아보기 <button class="x" data-close aria-label="닫기">×</button></h2>
+  <div class="thumbs" id="thumbs"></div>
+</div></div>
+<div id="zoom" role="dialog" aria-label="크게 보기"><button class="x" id="zClose" aria-label="닫기">×</button><img id="zImg" alt=""></div>
+
+<script>
+{
+const N=45;
+const src=n=>`pages/p${String(n).padStart(2,'0')}.jpg`;
+const th=n=>`thumbs/t${String(n).padStart(2,'0')}.jpg`;
+const TOC=[
+  ['표지',1],['목차',3],['01 인사말',4],['02 행사 계획',6],['03 사전 학습 자료',8],
+  ['평생학습, 왜 지금 더 중요해졌을까요?',9,1],['우리나라 성인들은 얼마나 배우고 있을까요?',12,1],
+  ['우리나라의 평생학습 지원제도는 어떻게 운영되고 있을까요?',19,1],['다른 나라에서는 평생학습을 어떻게 지원하고 있을까요?',26,1],
+  ['참고자료',29,1],['04 워크북',31],['05 발제 자료',34]
+];
+const $=s=>document.querySelector(s);
+const stage=$('#stage'),scroll=$('#scroll'),range=$('#range'),count=$('#count');
+let page=1,mode=null,io=null;
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const wide=()=>innerWidth>=1000&&innerWidth/innerHeight>1.15;
+const spreadOf=p=>p===1?[1]:(s=>s+1<=N?[s,s+1]:[s])(p%2?p-1:p);
+const eff=()=>mode==='spread'&&innerWidth<760?'single':mode;
+
+function render(){
+  const m=eff();
+  document.body.className='m-'+m;
+  document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
+  if(m==='scroll'){buildScroll();}
+  else{
+    const ps=m==='spread'?spreadOf(page):[page];
+    stage.className=m;
+    stage.innerHTML=ps.map(n=>`<img src="${src(n)}" data-n="${n}" alt="${n}쪽">`).join('');
+    $('#prev').disabled=page<=1;
+    $('#next').disabled=ps[ps.length-1]>=N;
+    [ps[0]-1,ps[0]-2,ps[ps.length-1]+1,ps[ps.length-1]+2].forEach(n=>{if(n>=1&&n<=N){new Image().src=src(n)}});
+  }
+  updateUI();
+}
+function updateUI(){
+  const m=eff();
+  const ps=m==='spread'?spreadOf(page):[page];
+  range.value=page;
+  count.innerHTML=`<b>${ps.join('–')}</b> / ${N}`;
+  try{history.replaceState(null,'','#p'+page)}catch(e){}
+  document.querySelectorAll('#tocList button').forEach(b=>{
+    const own=TOC.filter(t=>t[1]<=page).pop();b.classList.toggle('on',own&&+b.dataset.p===own[1])});
+}
+function go(n){
+  page=Math.max(1,Math.min(N,n));
+  if(eff()==='scroll'){const el=scroll.querySelector(`[data-n="${page}"]`);if(el)el.scrollIntoView({block:'start'});updateUI();}
+  else render();
+}
+function step(d){
+  const m=eff();
+  if(m==='spread'){const s=spreadOf(page)[0];go(d>0?(s===1?2:s+2):(s<=2?1:s-2));}
+  else go(page+d);
+}
+function buildScroll(){
+  if(!scroll.childElementCount){
+    scroll.innerHTML=Array.from({length:N},(_,i)=>`<img loading="lazy" src="${src(i+1)}" data-n="${i+1}" alt="${i+1}쪽">`).join('');
+    io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){page=+e.target.dataset.n;updateUI();}})},{root:scroll,rootMargin:'-45% 0px -50% 0px'});
+    scroll.querySelectorAll('img').forEach(i=>io.observe(i));
+  }
+  requestAnimationFrame(()=>{const el=scroll.querySelector(`[data-n="${page}"]`);if(el)el.scrollIntoView({block:'start'});});
+}
+function setMode(m,save){mode=m;if(save)store.set('gkw-mode',m);render();}
+
+/* 목차, 모아보기 */
+$('#tocList').innerHTML=TOC.map(([t,p,sub])=>`<button data-p="${p}" class="${sub?'sub':''}"><span>${t}</span><span class="pg">${p}</span></button>`).join('');
+$('#thumbs').innerHTML=Array.from({length:N},(_,i)=>`<button data-p="${i+1}"><img loading="lazy" src="${th(i+1)}" alt=""><span>${i+1}</span></button>`).join('');
+const open=id=>{const el=$(id);el.classList.add('open');if(id==='#grid'){document.querySelectorAll('#thumbs button').forEach(b=>b.classList.toggle('on',+b.dataset.p===page));const c=$(`#thumbs [data-p="${page}"]`);c&&c.scrollIntoView({block:'center'});}};
+const closeAll=()=>document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));
+$('#tocBtn').onclick=()=>open('#toc');
+$('#gridBtn').onclick=()=>open('#grid');
+document.querySelectorAll('.panel').forEach(p=>p.addEventListener('click',e=>{
+  if(e.target===p||e.target.closest('[data-close]'))closeAll();
+  const b=e.target.closest('[data-p]');if(b){closeAll();go(+b.dataset.p);}
+}));
+
+/* 크게 보기 */
+const zoom=$('#zoom');
+const openZoom=n=>{$('#zImg').src=src(n);$('#zImg').alt=n+'쪽';zoom.classList.add('open');zoom.scrollTop=0;};
+const closeZoom=()=>zoom.classList.remove('open');
+[stage,scroll].forEach(el=>el.addEventListener('click',e=>{const i=e.target.closest('img');if(i)openZoom(+i.dataset.n)}));
+$('#zClose').onclick=closeZoom;
+
+/* 조작 */
+$('#prev').onclick=()=>step(-1);
+$('#next').onclick=()=>step(1);
+range.oninput=()=>go(+range.value);
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>setMode(b.dataset.m,true));
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeZoom();closeAll();return;}
+  if(zoom.classList.contains('open')||e.target===range)return;
+  if(eff()==='scroll')return;
+  if(e.key==='ArrowRight'||e.key==='PageDown')step(1);
+  if(e.key==='ArrowLeft'||e.key==='PageUp')step(-1);
+});
+let tx=null,ty=null;
+stage.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+stage.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))step(dx<0?1:-1);tx=null;});
+let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(!store.get('gkw-mode'))mode=wide()?'spread':'single';render();},150)});
+const fromHash=()=>{const m=/^#p(\d+)$/.exec(location.hash);return m?+m[1]:null};
+addEventListener('hashchange',()=>{const n=fromHash();if(n&&n!==page)go(n)});
+
+mode=store.get('gkw-mode')||(wide()?'spread':'single');
+page=fromHash()||1;
+render();
+}
+</script>
+</body>
+</html>
